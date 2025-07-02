@@ -35,7 +35,7 @@ int main() {
     // A->C with no disruptions
     graph["A"].push_back({"C", 12, {}});
 
-    vector<double> weights = {0.5, 0.3, 0.1, 0.1}; // Weight of Traffic, Weather, Fuel, Customs Congestion 
+    vector<double> weights = {0.5, 0.3, 0.1, 0.1}; // weight of Traffic, Weather, Fuel, Customs Congestion 
 
     cout << "------------------------------" << endl;
     cout << "\tTest 1: Base Shortest Path without Disruptions" << endl;
@@ -90,7 +90,7 @@ int main() {
 }
 
     /*
-    Extreme Disruption Forces Reroute to Longer but Undisturbed Path
+    Extreme Disruption Forces Reroute to Longer But Undisturbed Path
     Graph: 
         A --1--> B --2--> C
         A -------8------> C (direct)
@@ -159,7 +159,7 @@ int main() {
 
     cout << "------------------------------" << endl;
     cout << "\tTest 4: Live Randomized Disruptions at Node C" << endl;
-    cout << "Generated disruptions for B → C:\n";
+    cout << "Generated disruptions for B -> C:\n";
     cout << "Traffic: " << randomDisruptions[0] << "\n";
     cout << "Weather: " << randomDisruptions[1] << "\n";
     cout << "Fuel:    " << randomDisruptions[2] << "\n";

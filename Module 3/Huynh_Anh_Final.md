@@ -51,6 +51,8 @@ Disruptions generated at runtime
 
 ### **Core Algorithm** 
 
+The InTandem algorithm extends Dijkstra’s shortest path by dynamically adjusting route weights based on real-time disruptions. If the weighted disruption score exceeds a set threshold, a quadratic penalty is applied to increase the cost of that route. This encourages the algorithm to avoid highly disrupted paths.
+
 ```C++
 for (auto& edge : graph[node]) {
             int adjusted = edge.baseWeight;
@@ -118,7 +120,9 @@ https://github.com/anhpls/intandem
 
 **Release Tag:** v1.0-final
 
-### **Link to Presentation**
+
+
+### **Presentation**
 
 https://docs.google.com/presentation/d/1q52GqUrGiFJkLEI7kY9xVXLBqCAOHKBOmbI4TnKsZoM/edit?usp=sharing
 
