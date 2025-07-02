@@ -4,40 +4,56 @@
 
 ---
 
-## 📌 Problem Statement
+## Problem Statement
 
 Traditional shipping systems pre-plan routes and rarely adapt once disruptions occur. This results in delays, higher costs, and inefficiencies. The InTandem algorithm bridges this gap by re-evaluating route weights based on real-time conditions to ensure optimal delivery paths.
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 - Uses Dijkstra's algorithm as a base
 - Incorporates weighted disruption scores per route (edge)
 - Applies a **quadratic penalty** to base cost if a disruption score exceeds a threshold
 - Chooses paths that minimize total adjusted cost
 
-### Pseudocode
+### Core Algorithm
 
 ```cpp
-for each edge from current node:
-    adjusted = baseWeight
-    if disruption score > threshold:
-        adjusted = baseWeight * (1 + (score - threshold)^2)
-    if current_cost + adjusted < dist[to]:
-        update dist[to]
+ for (auto& edge : graph[node]) {
+            int adjusted = edge.baseWeight;
+
+            // calculate weighted disruption score for this specific edge
+            if (!edge.disruptions.empty()) {
+                double weightedScore = 0.0;
+                for (size_t i = 0; i < weights.size() && i < edge.disruptions.size(); ++i) {
+                    weightedScore += weights[i] * edge.disruptions[i];
+                }
+                if (weightedScore > 5) {
+                    // if the combined disruption score exceeds the threshold (5),
+                    // apply a quadratic penalty to the base cost to reflect severity
+                    adjusted = static_cast<int>(round(edge.baseWeight * (1 + pow(weightedScore - 5, 2))));
+                }
+            }
+
+            // update shortest path if this new adjusted cost is better
+            if (cost + adjusted < dist[edge.to]) {
+                dist[edge.to] = cost + adjusted;
+                pq.push({dist[edge.to], edge.to});
+            }
+        }
 ```
 
 ---
 
-## ✅ Test Plan & Results
+## Test Plan & Results
 
-| Test   | Description                                        | Expected | Actual                   |
-| ------ | -------------------------------------------------- | -------- | ------------------------ |
-| Test 1 | No disruptions (A→B→C, cost = 2+3)                 | 5        | ✅ 5                     |
-| Test 2 | Disruption on C, penalty triggers                  | 9        | ✅ 9                     |
-| Test 3 | Severe disruption reroutes via alternate path      | 6        | ✅ 6                     |
-| Test 4 | Randomized disruptions (simulating real-time data) | Varies   | ✅ Outputs weighted cost |
+| Test   | Description                                        | Expected | Actual                |
+| ------ | -------------------------------------------------- | -------- | --------------------- |
+| Test 1 | No disruptions (A→B→C, cost = 2+3)                 | 5        | 5                     |
+| Test 2 | Disruption on C, penalty triggers                  | 9        | 9                     |
+| Test 3 | Severe disruption reroutes via alternate path      | 6        | 6                     |
+| Test 4 | Randomized disruptions (simulating real-time data) | Varies   | Outputs weighted cost |
 
 ---
 
@@ -46,8 +62,6 @@ for each edge from current node:
 - **Time Complexity:** `O((V + E) log V)`
 - **Space Complexity:** `O(V + E)`
   > Uses a priority queue (min-heap) and adjacency list for efficiency.
-
-Tested on graphs of up to 50+ nodes for scalability evaluation.
 
 ---
 
@@ -63,7 +77,7 @@ Tested on graphs of up to 50+ nodes for scalability evaluation.
 
 ## 🔗 Repository
 
-**GitHub:** [https://github.com/yourusername/intandem-algorithm](https://github.com/yourusername/intandem-algorithm)  
+**GitHub:** [https://github.com/anhpls/intandem](https://github.com/anhpls/intandem)  
 **Release Tag:** `v1.0-final`
 
 ---
