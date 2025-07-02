@@ -57,7 +57,7 @@ Traditional shipping systems pre-plan routes and rarely adapt once disruptions o
 
 ---
 
-## 🧪 Runtime & Memory
+## Runtime & Memory
 
 - **Time Complexity:** `O((V + E) log V)`
 - **Space Complexity:** `O(V + E)`
@@ -65,7 +65,7 @@ Traditional shipping systems pre-plan routes and rarely adapt once disruptions o
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 - Add API hooks for real-time disruption feeds
 - Expand to multiple simultaneous shipments
@@ -75,7 +75,7 @@ Traditional shipping systems pre-plan routes and rarely adapt once disruptions o
 
 ---
 
-## 🔗 Repository
+## Repository
 
 **GitHub:** [https://github.com/anhpls/intandem](https://github.com/anhpls/intandem)  
 **Release Tag:** `v1.0-final`
