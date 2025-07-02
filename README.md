@@ -75,6 +75,17 @@ Traditional shipping systems pre-plan routes and rarely adapt once disruptions o
 
 ---
 
+## Build & Run Instructions
+
+To compile and run:
+
+```bash
+g++ -std=c++17 main.cpp intandem.cpp -o intandem
+./intandem
+```
+
+---
+
 ## Repository
 
 **GitHub:** [https://github.com/anhpls/intandem](https://github.com/anhpls/intandem)  
